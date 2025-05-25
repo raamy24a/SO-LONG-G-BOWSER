@@ -6,11 +6,13 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/05/25 16:04:39 by radib            ###   ########.fr       */
+/*   Updated: 2025/05/25 19:02:31 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+void	render(void *mlx_ptr, void *win_ptr, int x, int y);
 
 #endif
