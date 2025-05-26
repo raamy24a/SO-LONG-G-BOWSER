@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/05/25 21:16:17 by radib            ###   ########.fr       */
+/*   Updated: 2025/05/26 14:00:03 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int handle_key(int keycode, void *param)
+void	cleanup(void	*mlx_ptr, void	*win_ptr, int i)
 {
-	if (keycode == 65307) // ESC key
+	static void	*mlx_ptrr;
+	static void	*win_ptrr;
+
+	if (i == 0)
+	{
+		mlx_ptrr = mlx_ptr;
+		win_ptrr = win_ptr;
+	}
+	if (i == 1)
+	{
+		mlx_clear_window(mlx_ptrr, win_ptrr);
+		mlx_destroy_display(mlx_ptrr);
+		free(mlx_ptrr);
 		exit(0);
+	}
+}
+
+int	handle_key(int keycode, void *param)
+{
+	if (keycode == 65307)
+		cleanup(NULL, NULL, 1);
+	// if (keycode == 119)
+	// 	W;
+	// if (keycode == 97)
+	// 	A;
+	// if (keycode == 115)
+	// 	S;
+	// if (keycode == 100)
+	// 	D;
 	(void)param;
 	return (0);
 }
@@ -27,14 +54,15 @@ int	main(void)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		x;
-	int		y;
+	void	*img;
+	int		i_w;
+	int		i_h;
 
-	x = 200;
-	y = 400;
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 1000, 600, "Fortnite");
-	render(mlx_ptr, win_ptr, x, y);
+	cleanup(mlx_ptr, win_ptr, 0);
+	img = mlx_xpm_file_to_image(mlx_ptr, "xpm/player.xpm", &i_w, &i_h);
+	mlx_put_image_to_window(mlx_ptr, win_ptr, img, 0, 0);
 	mlx_key_hook(win_ptr, handle_key, NULL);
 	mlx_loop(mlx_ptr);
 	return (0);
