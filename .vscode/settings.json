@@ -59,6 +59,8 @@
   "files.associations": {
 	"so_long.h": "c",
 	"mlx.h": "c",
-	"random": "c"
+	"random": "c",
+	"stdio.h": "c",
+	"fcntl.h": "c"
 }
 }

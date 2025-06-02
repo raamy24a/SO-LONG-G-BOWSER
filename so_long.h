@@ -6,12 +6,15 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/05/26 12:44:18 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/02 14:57:50 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+# include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_data
 {
@@ -23,5 +26,6 @@ typedef struct s_data
 }				t_data;
 
 void	render(void *mlx_ptr, void *win_ptr, int x, int y);
+char	*get_next_line(int fd);
 
 #endif

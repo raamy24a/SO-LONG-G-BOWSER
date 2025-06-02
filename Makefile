@@ -1,6 +1,7 @@
 NAME = so_long
 
-SRC_FILES = srcs/render.c srcs/parsing.c srcs/main.c srcs/input.c srcs/game.c
+SRC_FILES = srcs/render.c srcs/parsing.c srcs/main.c srcs/input.c srcs/game.c \
+	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 MLX_FILES = lib/mlx_init.c lib/mlx_new_window.c lib/mlx_pixel_put.c lib/mlx_loop.c \
 	lib/mlx_mouse_hook.c lib/mlx_key_hook.c lib/mlx_expose_hook.c lib/mlx_loop_hook.c \
 	lib/mlx_int_anti_resize_win.c lib/mlx_int_do_nothing.c \
