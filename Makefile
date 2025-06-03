@@ -18,7 +18,7 @@ OBJ = $(SRC_FILES:.c=.o)
 MLX_OBJ = $(MLX_FILES:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -lm
+CFLAGS = -g -Wall -Wextra -Werror -lm
 MLXFLAGS =  # No -Werror for MiniLibX
 INCLUDES = -Isrcs -Ilib
 

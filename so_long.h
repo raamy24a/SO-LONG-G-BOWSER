@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/06/02 14:57:50 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/03 14:10:37 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 typedef struct s_data
 {
@@ -27,5 +28,6 @@ typedef struct s_data
 
 void	render(void *mlx_ptr, void *win_ptr, int x, int y);
 char	*get_next_line(int fd);
+int		parsing(void);
 
 #endif
