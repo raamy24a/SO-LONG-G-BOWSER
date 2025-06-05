@@ -6,100 +6,135 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:59:19 by radib             #+#    #+#             */
-/*   Updated: 2025/06/03 16:56:24 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/05 15:53:35 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/mlx.h"
 #include "../so_long.h"
 
-char	**mapping_map(char **map, int lcount)
+void	mapping_map_cpy(t_map *mapdata)
 {
 	char	*currentline;
 	int		fd;
+	int		i;
 
-	map = malloc (sizeof (char *) * lcount);
+	mapdata->map_cpy = malloc (sizeof (char *) * mapdata->nbr_ligns);
 	fd = open ("maps/defaultmap.ber", O_RDONLY);
-	lcount = 0;
+	i = 0;
 	currentline = get_next_line(fd);
-	while (currentline != NULL)
+	mapdata->nbr_cols = (ft_strlen(currentline) - 1);
+	while (currentline)
 	{
-		map[lcount] = currentline;
+		if (mapdata->nbr_cols != (int)(ft_strlen(currentline) - 1))
+		{
+			mapdata->map_cpy = NULL;
+			return ;
+		}
+		mapdata->map_cpy[i] = currentline;
 		currentline = get_next_line(fd);
-		lcount++;
+		i++;
 	}
-	return (map);
 }
 
-int	is_wall_up_and_down(char **map, int linecount)
+int	is_solved(int i, int j, t_map *mapdata)
+{
+	u;
+}
+
+int	bfs(t_map *mapdata)
 {
 	int	i;
-	int	j;
-	int	k;
 
 	i = 0;
-	while (i < linecount)
+	while (is_solved == 0 && i < 10000)
 	{
-		j = 0;
-		if (i == 0 || i == linecount - 1)
+		i++;
+	}
+	if (is_solved == 1)
+		return (1);
+	else
+		return (0);
+}
+
+void	mapping_map(t_map *mapdata)
+{
+	char	*currentline;
+	int		fd;
+	int		i;
+
+	mapdata->map = malloc (sizeof (char *) * mapdata->nbr_ligns);
+	fd = open ("maps/defaultmap.ber", O_RDONLY);
+	i = 0;
+	currentline = get_next_line(fd);
+	mapdata->nbr_cols = (ft_strlen(currentline) - 1);
+	while (currentline)
+	{
+		if (mapdata->nbr_cols != (int)(ft_strlen(currentline) - 1))
 		{
-			while (map[i][j] && map[i][j] == '1')
-				j++;
-			if (map[i][j] && map[i][j] != '\n')
-				return (0);
-			if (k == 0)
-				k = j;
-			if (k != j)
-				return (0);
+			mapdata->map = NULL;
+			return ;
 		}
+		mapdata->map[i] = currentline;
+		currentline = get_next_line(fd);
+		i++;
+	}
+}
+
+int	is_wall_up_and_down(t_map *mapdata)
+{
+	int	j;
+
+	j = 0;
+	while (j < mapdata->nbr_cols && mapdata->map[0][j] == '1'
+		&& mapdata->map[mapdata->nbr_ligns - 1][j] == '1')
+		j++;
+	if (mapdata->map[0][j] && mapdata->map[0][j] != '\n')
+		return (0);
+	return (1);
+}
+
+int	is_wall(t_map *mapdata)
+{
+	int	i;
+
+	i = 0;
+	if (!is_wall_up_and_down(mapdata))
+		return (0);
+	while (i < mapdata->nbr_ligns)
+	{
+		if (mapdata->map[i][0] != '1'
+			|| mapdata->map[i][mapdata->nbr_cols - 1] != '1')
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	is_wall(char **map, int linecount)
+int	is_good(int i, int j, t_map *mapdata)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	if (!is_wall_up_and_down(map, linecount))
-		return (0);
-	while (i < linecount)
+	while (i < mapdata->nbr_ligns)
 	{
 		j = 0;
-		if (i != 0 && i != linecount - 1)
+		while (mapdata->map[i][j])
 		{
-			if (map[i][0] != '1')
-				return (0);
-		}
-		i++;
-	}
-}
-
-int	is_good(char **map, int linecount, int *i, t_map *mapdata)
-{
-	while (i[0] && i[0] < linecount)
-	{
-		while (map[0][1])
-		{
-			if (map[0][1] == '0' || map[0][1] == '1')
+			if (mapdata->map[i][j] == '0' || mapdata->map[i][j] == '1'
+				|| mapdata->map[i][j] == '\n')
 			{
 			}
-			if (map[0][1] == 'E')
+			else if (mapdata->map[i][j] == 'E')
 				mapdata->e++;
-			if (map[0][1] == 'P')
-				mapdata->p++;
-			if (map[0][1] == 'C')
+			else if (mapdata->map[i][j] == 'P')
+				mapdata->p = mapdata->map[i][j];
+			else if (mapdata->map[i][j] == 'C')
 				mapdata->c++;
 			else
 				return (0);
-			i[1]++;
+			j++;
 		}
-		i[0]++;
+		i++;
 	}
-	if (mapdata->e == 1 && mapdata->p == 1 && mapdata->c >= 1)
+	if (mapdata->e == 0 && mapdata->p && mapdata->c == 0)
 		return (1);
 	else
 		return (0);
@@ -107,18 +142,20 @@ int	is_good(char **map, int linecount, int *i, t_map *mapdata)
 
 int	parsing(void)
 {
-	int		lcount;
-	char	**map;
 	int		fd;
 	t_map	*mapdata;
 
 	fd = open ("maps/defaultmap.ber", O_RDONLY);
-	lcount = 0;
+	mapdata = malloc (sizeof (t_map));
 	while (get_next_line(fd))
-		lcount++;
-	map = 0;
-	map = mapping_map(map, lcount);
-	if (!is_wall(map, lcount) && !is_good(map, lcount, (int []){0, 0}, mapdata))
+		mapdata->nbr_ligns++;
+	mapping_map(mapdata);
+	mapping_map_cpy(mapdata);
+	mapdata->c_copy = mapdata->c;
+	if (mapdata->map == NULL)
+		return (0);
+	mapdata->p = 0;
+	if (!is_wall(mapdata) || !is_good(0, 0, mapdata) || !bfs(mapdata))
 		return (0);
 	else
 		return (1);
