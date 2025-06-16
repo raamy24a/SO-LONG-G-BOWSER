@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/06/05 14:39:26 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/17 01:20:12 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,21 @@ int	handle_key(int keycode, void *param)
 
 int	main(void)
 {
-	// void	*mlx_ptr;
-	// void	*win_ptr;
-	// void	*img;
-	// int		i_w;
-	// int		i_h;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img;
+	int		i_w;
+	int		i_h;
 
-	// mlx_ptr = mlx_init();
-	// win_ptr = mlx_new_window(mlx_ptr, 1000, 600, "Fortnite");
-	// cleanup(mlx_ptr, win_ptr, 0);
-	// img = mlx_xpm_file_to_image(mlx_ptr, "xpm/player.xpm", &i_w, &i_h);
-	// mlx_put_image_to_window(mlx_ptr, win_ptr, img, 0, 0);
-	// mlx_key_hook(win_ptr, handle_key, NULL);
-	// mlx_loop(mlx_ptr);
-	printf("%d\n", parsing());
+	if (parsing())
+		printf("1");
+	mlx_ptr = mlx_init();
+	win_ptr = mlx_new_window(mlx_ptr, 1000, 600, "Fortnite");
+	cleanup(mlx_ptr, win_ptr, 0);
+	img = mlx_xpm_file_to_image(mlx_ptr, "xpm/player.xpm", &i_w, &i_h);
+	mlx_put_image_to_window(mlx_ptr, win_ptr, img, 0, 0);
+	mlx_key_hook(win_ptr, handle_key, NULL);
+	mlx_loop(mlx_ptr);
 	return (0);
 }
 // ESC	65307

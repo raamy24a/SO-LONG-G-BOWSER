@@ -9,9 +9,9 @@ CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror
 INCLUDES = -Isrcs -Ilib -Ilibft
 
-all: lib/libmlx.a libft/libft.a $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ) lib/libmlx.a libft/libft.a
+$(NAME): $(OBJ)
 	$(CC) $(OBJ) -Llib -lmlx -Llibft -lft -lXext -lX11 -lm -o $(NAME)
 
 srcs/%.o: srcs/%.c
@@ -20,21 +20,11 @@ srcs/%.o: srcs/%.c
 get_next_line/%.o: get_next_line/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-lib/libmlx.a:
-	$(MAKE) -C lib
-
-libft/libft.a:
-	$(MAKE) -C libft
-
 clean:
 	rm -f $(OBJ)
-	$(MAKE) -C lib clean
-	$(MAKE) -C libft clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C lib clean
-	$(MAKE) -C libft fclean
 
 re: fclean all
 

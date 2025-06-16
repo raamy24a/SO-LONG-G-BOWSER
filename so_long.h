@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/06/05 17:02:34 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/13 13:59:41 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-typedef struct map_data
+typedef struct m
 {
-	char	**map;
+	char	**mp;
 	char	**map_cpy;
 	int		nbr_ligns;
 	int		nbr_cols;
