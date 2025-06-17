@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/06/13 13:59:41 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/17 01:29:36 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct m
 	int		nbr_cols;
 	int		c;
 	int		c_copy;
-	int		*p;
+	int		p[2];
 	int		e;
 }				t_map;
 
