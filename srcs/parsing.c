@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:59:19 by radib             #+#    #+#             */
-/*   Updated: 2025/06/17 02:26:41 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/17 14:49:02 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,6 @@
 #include "../so_long.h"
 #include "unistd.h"
 
-void	map_print(t_map *m)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < m->nbr_ligns)
-	{
-		x = 0;
-		while (m->mp[y][x] != '\n')
-		{
-			printf("%c", m->mp[y][x]);
-			x++;
-		}
-		write(1, "\n", 1);
-		y++;
-	}
-}
-void	map_copy_print(t_map *m)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < m->nbr_ligns)
-	{
-		x = 0;
-		while (m->map_cpy[y][x] != '\n')
-		{
-			printf("%c", m->map_cpy[y][x]);
-			x++;
-		}
-		write(1, "\n", 1);
-		y++;
-	}
-}
 void	mapping_map_cpy(t_map *m)
 {
 	char	*currentline;
@@ -109,7 +73,7 @@ int	is_solvable(t_map *m)
 	int	x;
 	int	y;
 
-	x = 0;
+	y = 0;
 	while (y < m->nbr_ligns)
 	{
 		x = 0;
@@ -134,7 +98,6 @@ int	bfs(t_map *m)
 	queue->head = 0;
 	queue->tail = 1;
 	queue_can_find(m, queue);
-	map_copy_print(m);
 	if (is_solvable(m))
 		return (1);
 	return (0);
@@ -223,13 +186,11 @@ int	is_good(int y, int x, t_map *m)
 	return (0);
 }
 
-int	parsing(void)
+int	parsing(t_map *m)
 {
 	int		fd;
-	t_map	*m;
 
 	fd = open ("maps/defaultmap.ber", O_RDONLY);
-	m = malloc (sizeof (t_map));
 	if (!m->p)
 		return (0);
 	m->e = 0;
