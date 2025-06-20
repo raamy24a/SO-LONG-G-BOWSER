@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/06/18 12:52:32 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/20 14:50:54 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct m
 	int		c_copy;
 	int		p[2];
 	int		e;
+	int		total_w;
+	int		total_h;
 	int		w;
 	int		h;
 }				t_map;
@@ -38,9 +40,9 @@ typedef struct queue
 	int	tail;
 }			t_queue;
 
-void	render(void *mlx_ptr, void *win_ptr, t_map m);
+int		render(void *mlx_ptr, void *win_ptr, t_map *m);
 char	*get_next_line(int fd);
-int		parsing(void);
+int		parsing(t_map *m);
 size_t	ft_strlen(const char *str);
 
 #endif

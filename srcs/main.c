@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/06/18 12:51:00 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/20 15:37:20 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,15 @@ int	main(void)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		y;
-	int		x;
 	t_map	*m;
 
-	m->x_size = 1920;
-	m->y_size = 1080;
 	m = malloc (sizeof (t_map));
-	if (parsing() != 1)
+	m->total_w = 2000;
+	m->total_h = 2000;
+	if (parsing(m) != 1)
 		return (printf("error"));
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, m->x_size, m->y_size, "Fortnite");
+	win_ptr = mlx_new_window(mlx_ptr, m->total_w, m->total_h, "Fortnite");
 	cleanup(mlx_ptr, win_ptr, 0);
 	if (render(mlx_ptr, win_ptr, m) != 1)
 		return (printf("error"));
