@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/06/20 15:37:20 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/20 16:36:11 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(void)
 	m->total_w = 2000;
 	m->total_h = 2000;
 	if (parsing(m) != 1)
-		return (printf("error"));
+		return (0);
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, m->total_w, m->total_h, "Fortnite");
 	cleanup(mlx_ptr, win_ptr, 0);

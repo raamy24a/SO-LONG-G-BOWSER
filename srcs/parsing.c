@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:59:19 by radib             #+#    #+#             */
-/*   Updated: 2025/06/17 14:49:02 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/20 17:05:08 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include "../so_long.h"
 #include "unistd.h"
 
+int		len_no_n(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	return (i);
+}
 void	mapping_map_cpy(t_map *m)
 {
 	char	*currentline;
@@ -24,10 +33,10 @@ void	mapping_map_cpy(t_map *m)
 	fd = open ("maps/defaultmap.ber", O_RDONLY);
 	i = 0;
 	currentline = get_next_line(fd);
-	m->nbr_cols = (ft_strlen(currentline) - 1);
+	m->nbr_cols = (len_no_n(currentline) - 1);
 	while (currentline)
 	{
-		if (m->nbr_cols != (int)(ft_strlen(currentline) - 1))
+		if (m->nbr_cols != (int)(len_no_n(currentline) - 1))
 		{
 			m->map_cpy = NULL;
 			return ;
@@ -113,10 +122,10 @@ void	mapping_map(t_map *m)
 	fd = open ("maps/defaultmap.ber", O_RDONLY);
 	i = 0;
 	currentline = get_next_line(fd);
-	m->nbr_cols = (ft_strlen(currentline) - 1);
+	m->nbr_cols = (len_no_n(currentline) - 1);
 	while (currentline)
 	{
-		if (m->nbr_cols != (int)(ft_strlen(currentline) - 1))
+		if (m->nbr_cols != (int)(len_no_n(currentline) - 1))
 		{
 			m->mp = NULL;
 			return ;
@@ -127,30 +136,23 @@ void	mapping_map(t_map *m)
 	}
 }
 
-int	is_wall_up_and_down(t_map *m)
+int	is_wall(t_map *m)
 {
+	int	i;
 	int	j;
 
+	i = 0;
 	j = 0;
 	while (j < m->nbr_cols && m->mp[0][j] == '1'
 		&& m->mp[m->nbr_ligns - 1][j] == '1')
 		j++;
-	if (m->mp[0][j] && m->mp[0][j] != '\n')
+	if ((m->mp[0][j] && m->mp[0][j] != '1'))
 		return (0);
-	return (1);
-}
-
-int	is_wall(t_map *m)
-{
-	int	i;
-
 	i = 0;
-	if (!is_wall_up_and_down(m))
-		return (0);
 	while (i < m->nbr_ligns)
 	{
 		if (m->mp[i][0] != '1'
-			|| m->mp[i][m->nbr_cols - 1] != '1')
+			|| m->mp[i][m->nbr_cols] != '1')
 			return (0);
 		i++;
 	}
@@ -203,8 +205,12 @@ int	parsing(t_map *m)
 	m->c_copy = m->c;
 	if (m->mp == NULL)
 		return (0);
-	if (!is_wall(m) || !is_good(0, 0, m) || !bfs(m))
-		return (0);
+	if (!is_wall(m))
+		return (printf("not a good wall"));
+	if (!is_good(0, 0, m))
+		return (printf("not a good number of C or P or E"));
+	if (!bfs(m))
+		return (printf("no path\n"));
 	else
 		return (1);
 }

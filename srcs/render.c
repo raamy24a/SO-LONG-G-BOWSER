@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:01:02 by radib             #+#    #+#             */
-/*   Updated: 2025/06/20 16:17:38 by radib            ###   ########.fr       */
+/*   Updated: 2025/06/20 17:06:45 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	render(void *mlx_ptr, void *win_ptr, t_map *m)
 	while (coords[0] < m->nbr_ligns)
 	{
 		coords[1] = 0;
-		while (coords[1] < m->)
+		while (coords[1] <= m->nbr_cols)
 		{
 			renderimage(mlx_ptr, win_ptr, m, coords);
 			coords[1]++;
