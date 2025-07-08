@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/06/20 16:36:11 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/08 16:37:54 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,59 +15,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	cleanup(void	*mlx_ptr, void	*win_ptr, int i)
+void	cleanup(t_map *m)
 {
-	static void	*mlx_ptrr;
-	static void	*win_ptrr;
-
-	if (i == 0)
-	{
-		mlx_ptrr = mlx_ptr;
-		win_ptrr = win_ptr;
-	}
-	if (i == 1)
-	{
-		mlx_clear_window(mlx_ptrr, win_ptrr);
-		mlx_destroy_display(mlx_ptrr);
-		free(mlx_ptrr);
-		exit(0);
-	}
+	mlx_clear_window(m->m_ptr, m->w_ptr);
+	mlx_destroy_display(m->m_ptr);
+	free(m->m_ptr);
+	exit(0);
 }
 
-int	handle_key(int keycode, void *param)
+int	handle_key(int key, t_map *m)
 {
-	if (keycode == 65307)
-		cleanup(NULL, NULL, 1);
-	// if (keycode == 119)
-	// 	W;
-	// if (keycode == 97)
-	// 	A;
-	// if (keycode == 115)
-	// 	S;
-	// if (keycode == 100)
-	// 	D;
-	(void)param;
+	if (key == 65307)
+		cleanup(m);
+	// if (key == 65363 || key == 65361 || key == 65362 || key == 65364
+	// 	|| key == 119 || key == 97 || key == 115 || key == 100)
+		// moving(m, key);
 	return (0);
 }
 
 int	main(void)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
 	t_map	*m;
 
 	m = malloc (sizeof (t_map));
-	m->total_w = 2000;
-	m->total_h = 2000;
-	if (parsing(m) != 1)
-		return (0);
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, m->total_w, m->total_h, "Fortnite");
-	cleanup(mlx_ptr, win_ptr, 0);
-	if (render(mlx_ptr, win_ptr, m) != 1)
+	parsing(&m);
+	m->m_ptr = mlx_init();
+	m->total_w = 50 * (m->nbr_cols + 1);
+	m->total_h = 50 * (m->nbr_ligns);
+	m->w_ptr = mlx_new_window(m->m_ptr,
+			m->total_w, m->total_h, "So_long");
+	if (render(&m) != 1)
 		return (printf("error"));
-	mlx_key_hook(win_ptr, handle_key, NULL);
-	mlx_loop(mlx_ptr);
+	mlx_key_hook(m->w_ptr, handle_key, m);
+	mlx_loop(m->m_ptr);
 	return (0);
 }
 // ESC	65307
