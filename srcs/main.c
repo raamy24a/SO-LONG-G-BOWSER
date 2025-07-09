@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/07/08 16:37:54 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/09 22:58:53 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@
 
 void	cleanup(t_map *m)
 {
+	int	i;
+
+	i = 0;
+	while (i < 5)
+	{
+		mlx_destroy_image(m->m_ptr, m->im[i]);
+		i++;
+	}
 	mlx_clear_window(m->m_ptr, m->w_ptr);
-	mlx_destroy_display(m->m_ptr);
+	// mlx_destroy_display(m->m_ptr);
 	free(m->m_ptr);
 	exit(0);
 }
