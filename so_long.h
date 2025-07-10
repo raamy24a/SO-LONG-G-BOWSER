@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/07/10 11:51:37 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/10 14:39:03 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ typedef struct m
 	int		nbr_ligns;
 	int		nbr_cols;
 	int		c;
+	int		nbr_of_moves;
 	int		c_copy;
 	int		c_possessed;
 	int		c_left;
-	int		p[2];
+	int		*p;
 	int		e;
 	int		total_w;
 	int		total_h;
@@ -51,6 +52,6 @@ int		parsing(t_map **m);
 size_t	ft_strlen(const char *str);
 void	moving(t_map *m, int key);
 int		len_no_n(char *line);
-void	movetile(t_map **m, int *coords, int *newcoords);
+int		movetile(t_map **m, int *coords, int *newcoords);
 
 #endif

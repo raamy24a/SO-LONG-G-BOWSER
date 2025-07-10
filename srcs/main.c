@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/07/10 12:14:14 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/10 14:36:06 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(void)
 	m->m_ptr = mlx_init();
 	m->total_w = 50 * (m->nbr_cols + 1);
 	m->total_h = 50 * (m->nbr_ligns);
+	m->nbr_of_moves = 0;
 	m->w_ptr = mlx_new_window(m->m_ptr,
 			m->total_w, m->total_h, "So_long");
 	if (render(&m) != 1)

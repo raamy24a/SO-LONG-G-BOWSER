@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:59:19 by radib             #+#    #+#             */
-/*   Updated: 2025/07/08 16:10:59 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/10 14:40:45 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../so_long.h"
 #include "unistd.h"
 
-int		len_no_n(char *line)
+int	len_no_n(char *line)
 {
 	int	i;
 
@@ -23,6 +23,7 @@ int		len_no_n(char *line)
 		i++;
 	return (i);
 }
+
 void	mapping_map_cpy(t_map **m)
 {
 	char	*currentline;
@@ -166,9 +167,7 @@ int	is_good(int y, int x, t_map **m)
 		x = 0;
 		while ((*m)->mp[y][x])
 		{
-			if ((*m)->mp[y][x] == '0' || (*m)->mp[y][x] == '1' || (*m)->mp[y][x] == '\n')
-				;
-			else if ((*m)->mp[y][x] == 'E')
+			if ((*m)->mp[y][x] == 'E')
 				(*m)->e++;
 			else if ((*m)->mp[y][x] == 'P')
 			{
@@ -177,7 +176,8 @@ int	is_good(int y, int x, t_map **m)
 			}
 			else if ((*m)->mp[y][x] == 'C')
 				(*m)->c++;
-			else
+			else if (!((*m)->mp[y][x] == '0'
+				|| (*m)->mp[y][x] == '1' || (*m)->mp[y][x] == '\n'))
 				return (0);
 			x++;
 		}
@@ -193,9 +193,10 @@ int	parsing(t_map **m)
 	int		fd;
 
 	fd = open ("maps/defaultmap.ber", O_RDONLY);
+	(*m)->e = 0;
+	(*m)->p = malloc(sizeof (int) * 2);
 	if (!(*m)->p)
 		return (0);
-	(*m)->e = 0;
 	(*m)->p[0] = 0;
 	(*m)->c = 0;
 	while (get_next_line(fd))
