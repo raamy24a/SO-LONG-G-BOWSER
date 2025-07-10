@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:01:02 by radib             #+#    #+#             */
-/*   Updated: 2025/07/09 15:40:04 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/10 12:13:40 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	renderimages(t_map **m)
 	(*m)->im[1] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/w.xpm", &x, &x);
 	(*m)->im[0] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/g.xpm", &x, &x);
 	(*m)->im[3] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/e.xpm", &x, &x);
+	(*m)->im[5] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/v.xpm", &x, &x);
 	return (1);
 }
+
 void	putimages(t_map **m, int *coords)
 {
 	int	x;
@@ -53,6 +55,7 @@ void	putimages(t_map **m, int *coords)
 	if ((*m)->mp[y][x] == 'E')
 		mlx_put_image_to_window((*m)->m_ptr, (*m)->w_ptr, (*m)->im[3], a, b);
 }
+
 void	movetile(t_map **m, int *coords, int *newcoords)
 {
 	int	x;
@@ -73,13 +76,15 @@ void	movetile(t_map **m, int *coords, int *newcoords)
 	a = x * 50;
 	b = y * 50;
 	mlx_put_image_to_window((*m)->m_ptr, (*m)->w_ptr, (*m)->im[2], a, b);
+	(*m)->p[0] = newcoords[0];
+	(*m)->p[1] = newcoords[1];
 }
 
 int	render(t_map **m)
 {
-	renderimages(m);
-	int		coords[2];
+	int	coords[2];
 
+	renderimages(m);
 	coords[0] = 0;
 	while (coords[0] < (*m)->nbr_ligns)
 	{
@@ -93,4 +98,3 @@ int	render(t_map **m)
 	}
 	return (1);
 }
-

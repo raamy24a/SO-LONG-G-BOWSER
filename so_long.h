@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/07/09 15:31:20 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/10 11:51:37 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		render(t_map **m);
 char	*get_next_line(int fd);
 int		parsing(t_map **m);
 size_t	ft_strlen(const char *str);
-void	moving(t_map **m, int key);
+void	moving(t_map *m, int key);
 int		len_no_n(char *line);
 void	movetile(t_map **m, int *coords, int *newcoords);
 

@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/07/09 22:58:53 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/10 12:14:14 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	cleanup(t_map *m)
 	int	i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 6)
 	{
 		mlx_destroy_image(m->m_ptr, m->im[i]);
 		i++;
@@ -35,9 +35,9 @@ int	handle_key(int key, t_map *m)
 {
 	if (key == 65307)
 		cleanup(m);
-	// if (key == 65363 || key == 65361 || key == 65362 || key == 65364
-	// 	|| key == 119 || key == 97 || key == 115 || key == 100)
-		// moving(m, key);
+	if (key == 65363 || key == 65361 || key == 65362 || key == 65364
+		|| key == 119 || key == 97 || key == 115 || key == 100)
+		moving(m, key);
 	return (0);
 }
 
@@ -46,7 +46,9 @@ int	main(void)
 	t_map	*m;
 
 	m = malloc (sizeof (t_map));
-	parsing(&m);
+	if (!parsing(&m))
+		return (0);
+	m->c_possessed = 0;
 	m->m_ptr = mlx_init();
 	m->total_w = 50 * (m->nbr_cols + 1);
 	m->total_h = 50 * (m->nbr_ligns);
