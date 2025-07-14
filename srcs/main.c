@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/07/14 07:39:26 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 08:06:12 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void	map_clean(t_map *m)
+{
+	int	i;
+
+	i = 0;
+	while (i < m->nbr_ligns)
+	{
+		free(m->map_cpy[i]);
+		i++;
+	}
+	i = 0;
+	while (i < m->nbr_ligns)
+	{
+		free(m->mp[i]);
+		i++;
+	}
+	free(m->map_cpy);
+	free(m->mp);
+	free(m->p);
+	free(m);
+}
 void	cleanup(t_map *m)
 {
 	int	i;
@@ -29,23 +50,8 @@ void	cleanup(t_map *m)
 	mlx_destroy_window(m->m_ptr, m->w_ptr);
 	mlx_destroy_display(m->m_ptr);
 	free(m->m_ptr);
-	i = 0;
-	while (i < m->nbr_ligns)
-	{
-		free(m->map_cpy[i]);
-		i++;
-	}
-	i = 0;
-	while (i < m->nbr_ligns)
-	{
-		free(m->mp[i]);
-		i++;
-	}
-	free(m->map_cpy);
-	free(m->p);
-	free(m->mp);
 	free(m->im);
-	free(m);
+	map_clean(m);
 	exit(0);
 }
 
@@ -77,8 +83,11 @@ int	main(void)
 
 	m = malloc (sizeof (t_map));
 	m->nbr_ligns = 0;
-	if (!parsing(&m))
+	if (parsing(&m) != 1)
+	{
+		map_clean(m);
 		return (0);
+	}
 	init_m(&m);
 	if (render(&m) != 1)
 		return (printf("error"));
