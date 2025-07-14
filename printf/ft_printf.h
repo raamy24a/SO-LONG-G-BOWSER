@@ -1,14 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/25 16:01:09 by radib             #+#    #+#             */
-/*   Updated: 2025/05/25 17:14:24 by radib            ###   ########.fr       */
+/*   Created: 2025/04/09 16:57:46 by radib             #+#    #+#             */
+/*   Updated: 2025/05/06 14:02:28 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/mlx.h"
-#include "../so_long.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
+# include <stdarg.h>
+# include <unistd.h>
+
+int	ft_putnbr(int n);
+int	ft_put_unsigned(unsigned int decimal);
+int	ft_putstr(char *s);
+int	ft_printf(const char *format_str, ...);
+
+#endif

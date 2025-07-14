@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:01:02 by radib             #+#    #+#             */
-/*   Updated: 2025/07/14 05:37:36 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 08:57:13 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,25 @@ int	renderimages(t_map **m)
 	(*m)->im = malloc(sizeof(void *) * 6);
 	if (!(*m)->im)
 		return (0);
-	(*m)->im[2] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/p.xpm", &x, &x);
-	(*m)->im[4] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/c.xpm", &x, &x);
-	(*m)->im[1] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/w.xpm", &x, &x);
 	(*m)->im[0] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/g.xpm", &x, &x);
+	if ((*m)->im[0] == NULL)
+		return (0);
+	(*m)->im[1] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/w.xpm", &x, &x);
+	if ((*m)->im[1] == NULL)
+		return (1);
+	(*m)->im[2] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/p.xpm", &x, &x);
+	if ((*m)->im[2] == NULL)
+		return (2);
 	(*m)->im[3] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/e.xpm", &x, &x);
+	if ((*m)->im[3] == NULL)
+		return (3);
+	(*m)->im[4] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/c.xpm", &x, &x);
+	if ((*m)->im[4] == NULL)
+		return (4);
 	(*m)->im[5] = mlx_xpm_file_to_image((*m)->m_ptr, "xpm/v.xpm", &x, &x);
-	return (1);
+	if ((*m)->im[5] == NULL)
+		return (5);
+	return (-1);
 }
 
 void	putimages(t_map **m, int *coords)
@@ -99,8 +111,11 @@ int	movetile(t_map **m, int *coords, int *newcoords)
 int	render(t_map **m)
 {
 	int	coords[2];
+	int	x;
 
-	renderimages(m);
+	x = renderimages(m);
+	if (x != -1)
+		return (x);
 	coords[0] = 0;
 	while (coords[0] < (*m)->nbr_ligns)
 	{
@@ -112,5 +127,5 @@ int	render(t_map **m)
 		}
 		coords[0]++;
 	}
-	return (1);
+	return (-1);
 }

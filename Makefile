@@ -1,7 +1,8 @@
 NAME = so_long
 
-SRC_FILES = srcs/render.c srcs/parsing.c srcs/main.c srcs/input.c srcs/game.c \
-	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC_FILES = srcs/render.c srcs/parsing.c srcs/main.c srcs/game.c \
+	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+	printf/ft_printf.c printf/ft_putnbr.c
 
 OBJ = $(SRC_FILES:.c=.o)
 

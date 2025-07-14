@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/07/14 08:06:12 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 09:01:14 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	map_clean(t_map *m)
 	free(m->p);
 	free(m);
 }
-void	cleanup(t_map *m)
+
+void	cleanup(t_map *m, int x)
 {
 	int	i;
 
 	i = 0;
-	while (i < 6)
+	while (i < x)
 	{
 		mlx_destroy_image(m->m_ptr, m->im[i]);
 		i++;
@@ -58,7 +59,7 @@ void	cleanup(t_map *m)
 int	handle_key(int key, t_map *m)
 {
 	if (key == 65307)
-		cleanup(m);
+		cleanup(m, 6);
 	if (key == 65363 || key == 65361 || key == 65362 || key == 65364
 		|| key == 119 || key == 97 || key == 115 || key == 100)
 		moving(m, key);
@@ -77,9 +78,11 @@ void	init_m(t_map **m)
 	n->nbr_of_moves = 0;
 	n->w_ptr = mlx_new_window(n->m_ptr, n->total_w, n->total_h, "So_long");
 }
+
 int	main(void)
 {
 	t_map	*m;
+	int		x;
 
 	m = malloc (sizeof (t_map));
 	m->nbr_ligns = 0;
@@ -89,8 +92,11 @@ int	main(void)
 		return (0);
 	}
 	init_m(&m);
-	if (render(&m) != 1)
-		return (printf("error"));
+	x = render(&m);
+	if (x != -1)
+	{
+		cleanup(m, x);
+	}
 	mlx_key_hook(m->w_ptr, handle_key, m);
 	mlx_loop(m->m_ptr);
 	return (0);

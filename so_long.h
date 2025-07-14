@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/07/14 06:11:58 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 08:46:57 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ size_t	ft_strlen(const char *str);
 void	moving(t_map *m, int key);
 int		len_no_n(char *line);
 int		movetile(t_map **m, int *coords, int *newcoords);
+int		ft_putnbr(int n);
+int		ft_put_unsigned(unsigned int decimal);
+int		ft_putstr(char *s);
+int		ft_printf(const char *format_str, ...);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:01:37 by radib             #+#    #+#             */
-/*   Updated: 2025/07/10 14:21:02 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 08:30:42 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,49 +17,64 @@ void	move_right(t_map *m)
 {
 	if (m->mp[m->p[0]][m->p[1] + 1] != '1')
 	{
+		m->nbr_of_moves++;
 		if (m->mp[m->p[0]][m->p[1] + 1] == 'C')
 			m->c_possessed++;
 		if (m->mp[m->p[0]][m->p[1] + 1] == 'E' && m->c_possessed == m->c)
 			mlx_put_image_to_window(m->m_ptr, m->w_ptr, m->im[5], 0, 0);
-		movetile(&m, (int []){m->p[0],m->p[1]}, (int []){m->p[0],(m->p[1]+ 1)});
+		movetile(&m, (int []){m->p[0], m->p[1]},
+			(int []){m->p[0], (m->p[1] + 1)});
 	}
+	ft_printf("%d\n", m->nbr_of_moves);
 }
+
 void	move_left(t_map *m)
 {
 	if (m->mp[m->p[0]][m->p[1] - 1] != '1')
 	{
+		m->nbr_of_moves++;
 		if (m->mp[m->p[0]][m->p[1] - 1] == 'C')
 			m->c_possessed++;
 		if (m->mp[m->p[0]][m->p[1] - 1] == 'E' && m->c_possessed == m->c)
 			mlx_put_image_to_window(m->m_ptr, m->w_ptr, m->im[5], 0, 0);
-		movetile(&m, (int []){m->p[0],m->p[1]}, (int []){m->p[0],(m->p[1]- 1)});
+		movetile(&m, (int []){m->p[0], m->p[1]},
+			(int []){m->p[0], (m->p[1] - 1)});
 	}
+	ft_printf("%d\n", m->nbr_of_moves);
 }
+
 void	move_up(t_map *m)
 {
 	if (m->mp[m->p[0] - 1][m->p[1]] != '1')
 	{
+		m->nbr_of_moves++;
 		if (m->mp[m->p[0] - 1][m->p[1]] == 'C')
 			m->c_possessed++;
 		if (m->mp[m->p[0] - 1][m->p[1]] == 'E' && m->c_possessed == m->c)
 		{
 			mlx_put_image_to_window(m->m_ptr, m->w_ptr, m->im[5], 0, 0);
 		}
-		movetile(&m, (int []){m->p[0],m->p[1]}, (int []){(m->p[0] - 1),m->p[1]});
+		movetile(&m, (int []){m->p[0], m->p[1]},
+			(int []){(m->p[0] - 1), m->p[1]});
 	}
+	ft_printf("%d\n", m->nbr_of_moves);
 }
+
 void	move_down(t_map *m)
 {
 	if (m->mp[m->p[0] + 1][m->p[1]] != '1')
 	{
+		m->nbr_of_moves++;
 		if (m->mp[m->p[0] + 1][m->p[1]] == 'C')
 			m->c_possessed++;
 		if (m->mp[m->p[0] + 1][m->p[1]] == 'E' && m->c_possessed == m->c)
 		{
 			mlx_put_image_to_window(m->m_ptr, m->w_ptr, m->im[5], 0, 0);
 		}
-		movetile(&m, (int []){m->p[0],m->p[1]}, (int []){(m->p[0] + 1),m->p[1]});
+		movetile(&m, (int []){m->p[0], m->p[1]},
+			(int []){(m->p[0] + 1), m->p[1]});
 	}
+	ft_printf("%d\n", m->nbr_of_moves);
 }
 
 void	moving(t_map *m, int key)
