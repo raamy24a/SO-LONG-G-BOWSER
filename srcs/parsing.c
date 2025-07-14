@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:59:19 by radib             #+#    #+#             */
-/*   Updated: 2025/07/14 06:37:47 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 07:20:05 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ int	is_good(int y, int x, t_map **m)
 int	parsing(t_map **m)
 {
 	int		fd;
+	char	*line;
 
 	fd = open ("maps/defaultmap.ber", O_RDONLY);
 	(*m)->e = 0;
@@ -203,8 +204,14 @@ int	parsing(t_map **m)
 		return (0);
 	(*m)->p[0] = 0;
 	(*m)->c = 0;
-	while (get_next_line(fd))
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
 		(*m)->nbr_ligns++;
+	}
+	free(line);
 	mapping_map(m);
 	mapping_map_cpy(m);
 	(*m)->c_copy = (*m)->c;

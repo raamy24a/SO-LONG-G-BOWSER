@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/07/14 06:19:38 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 07:39:26 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,21 @@ void	cleanup(t_map *m)
 		i++;
 	}
 	mlx_clear_window(m->m_ptr, m->w_ptr);
+	mlx_destroy_window(m->m_ptr, m->w_ptr);
 	mlx_destroy_display(m->m_ptr);
 	free(m->m_ptr);
+	i = 0;
+	while (i < m->nbr_ligns)
+	{
+		free(m->map_cpy[i]);
+		i++;
+	}
+	i = 0;
+	while (i < m->nbr_ligns)
+	{
+		free(m->mp[i]);
+		i++;
+	}
 	free(m->map_cpy);
 	free(m->p);
 	free(m->mp);
