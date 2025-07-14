@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/07/10 14:36:06 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 06:19:38 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ void	cleanup(t_map *m)
 		i++;
 	}
 	mlx_clear_window(m->m_ptr, m->w_ptr);
-	// mlx_destroy_display(m->m_ptr);
+	mlx_destroy_display(m->m_ptr);
 	free(m->m_ptr);
+	free(m->map_cpy);
+	free(m->p);
+	free(m->mp);
+	free(m->im);
+	free(m);
 	exit(0);
 }
 
@@ -41,20 +46,27 @@ int	handle_key(int key, t_map *m)
 	return (0);
 }
 
+void	init_m(t_map **m)
+{
+	t_map	*n;
+
+	n = *m;
+	n->c_possessed = 0;
+	n->m_ptr = mlx_init();
+	n->total_w = 50 * (n->nbr_cols + 1);
+	n->total_h = 50 * (n->nbr_ligns);
+	n->nbr_of_moves = 0;
+	n->w_ptr = mlx_new_window(n->m_ptr, n->total_w, n->total_h, "So_long");
+}
 int	main(void)
 {
 	t_map	*m;
 
 	m = malloc (sizeof (t_map));
+	m->nbr_ligns = 0;
 	if (!parsing(&m))
 		return (0);
-	m->c_possessed = 0;
-	m->m_ptr = mlx_init();
-	m->total_w = 50 * (m->nbr_cols + 1);
-	m->total_h = 50 * (m->nbr_ligns);
-	m->nbr_of_moves = 0;
-	m->w_ptr = mlx_new_window(m->m_ptr,
-			m->total_w, m->total_h, "So_long");
+	init_m(&m);
 	if (render(&m) != 1)
 		return (printf("error"));
 	mlx_key_hook(m->w_ptr, handle_key, m);

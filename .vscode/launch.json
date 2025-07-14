@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/raamy/19/so_long-g/srcs",
-      "program": "/home/raamy/19/so_long-g/srcs/build/Debug/outDebug",
+      "cwd": "/home/raamy/19/so_long-g",
+      "program": "/home/raamy/19/so_long-g/so_long",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

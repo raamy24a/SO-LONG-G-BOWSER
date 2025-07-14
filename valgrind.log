@@ -1,0 +1,95 @@
+==17640== Memcheck, a memory error detector
+==17640== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==17640== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==17640== Command: ./so_long
+==17640== Parent PID: 12724
+==17640== 
+==17640== 
+==17640== HEAP SUMMARY:
+==17640==     in use at exit: 1,741 bytes in 20 blocks
+==17640==   total heap usage: 2,057 allocs, 2,037 frees, 1,802,195 bytes allocated
+==17640== 
+==17640== 35 bytes in 1 blocks are definitely lost in loss record 1 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x1106D2: ft_strrchr_b (get_next_line_utils.c:29)
+==17640==    by 0x11060F: get_next_line (get_next_line.c:98)
+==17640==    by 0x10F95C: parsing (parsing.c:206)
+==17640==    by 0x10FC5E: main (main.c:67)
+==17640== 
+==17640== 35 bytes in 1 blocks are definitely lost in loss record 2 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x1106D2: ft_strrchr_b (get_next_line_utils.c:29)
+==17640==    by 0x11060F: get_next_line (get_next_line.c:98)
+==17640==    by 0x10F579: mapping_map (parsing.c:139)
+==17640==    by 0x10F96D: parsing (parsing.c:208)
+==17640==    by 0x10FC5E: main (main.c:67)
+==17640== 
+==17640== 35 bytes in 1 blocks are definitely lost in loss record 3 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x1106D2: ft_strrchr_b (get_next_line_utils.c:29)
+==17640==    by 0x11060F: get_next_line (get_next_line.c:98)
+==17640==    by 0x10F01C: mapping_map_cpy (parsing.c:46)
+==17640==    by 0x10F979: parsing (parsing.c:209)
+==17640==    by 0x10FC5E: main (main.c:67)
+==17640== 
+==17640== 36 bytes in 1 blocks are definitely lost in loss record 4 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x1106BC: ft_strrchr_b (get_next_line_utils.c:27)
+==17640==    by 0x11060F: get_next_line (get_next_line.c:98)
+==17640==    by 0x10F504: mapping_map (parsing.c:129)
+==17640==    by 0x10F96D: parsing (parsing.c:208)
+==17640==    by 0x10FC5E: main (main.c:67)
+==17640== 
+==17640== 36 bytes in 1 blocks are definitely lost in loss record 5 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x1106BC: ft_strrchr_b (get_next_line_utils.c:27)
+==17640==    by 0x11060F: get_next_line (get_next_line.c:98)
+==17640==    by 0x10EFA5: mapping_map_cpy (parsing.c:36)
+==17640==    by 0x10F979: parsing (parsing.c:209)
+==17640==    by 0x10FC5E: main (main.c:67)
+==17640== 
+==17640== 144 bytes in 4 blocks are definitely lost in loss record 6 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x1106BC: ft_strrchr_b (get_next_line_utils.c:27)
+==17640==    by 0x11060F: get_next_line (get_next_line.c:98)
+==17640==    by 0x10F579: mapping_map (parsing.c:139)
+==17640==    by 0x10F96D: parsing (parsing.c:208)
+==17640==    by 0x10FC5E: main (main.c:67)
+==17640== 
+==17640== 144 bytes in 4 blocks are definitely lost in loss record 7 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x1106BC: ft_strrchr_b (get_next_line_utils.c:27)
+==17640==    by 0x11060F: get_next_line (get_next_line.c:98)
+==17640==    by 0x10F01C: mapping_map_cpy (parsing.c:46)
+==17640==    by 0x10F979: parsing (parsing.c:209)
+==17640==    by 0x10FC5E: main (main.c:67)
+==17640== 
+==17640== 160 bytes in 1 blocks are indirectly lost in loss record 8 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x489F9EF: XCreateGC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==17640==    by 0x110E4E: mlx_new_window (in /home/raamy/19/so_long-g/so_long)
+==17640==    by 0x10FC13: init_m (main.c:59)
+==17640==    by 0x10FC75: main (main.c:69)
+==17640== 
+==17640== 180 bytes in 5 blocks are definitely lost in loss record 9 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x1106BC: ft_strrchr_b (get_next_line_utils.c:27)
+==17640==    by 0x11060F: get_next_line (get_next_line.c:98)
+==17640==    by 0x10F95C: parsing (parsing.c:206)
+==17640==    by 0x10FC5E: main (main.c:67)
+==17640== 
+==17640== 1,096 (936 direct, 160 indirect) bytes in 1 blocks are definitely lost in loss record 10 of 10
+==17640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==17640==    by 0x110DB0: mlx_new_window (in /home/raamy/19/so_long-g/so_long)
+==17640==    by 0x10FC13: init_m (main.c:59)
+==17640==    by 0x10FC75: main (main.c:69)
+==17640== 
+==17640== LEAK SUMMARY:
+==17640==    definitely lost: 1,581 bytes in 19 blocks
+==17640==    indirectly lost: 160 bytes in 1 blocks
+==17640==      possibly lost: 0 bytes in 0 blocks
+==17640==    still reachable: 0 bytes in 0 blocks
+==17640==         suppressed: 0 bytes in 0 blocks
+==17640== 
+==17640== For lists of detected and suppressed errors, rerun with: -s
+==17640== ERROR SUMMARY: 9 errors from 9 contexts (suppressed: 1 from 1)

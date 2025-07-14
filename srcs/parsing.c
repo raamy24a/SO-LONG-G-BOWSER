@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:59:19 by radib             #+#    #+#             */
-/*   Updated: 2025/07/10 14:40:45 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/14 06:37:47 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,11 @@ int	bfs(t_map **m)
 	queue->tail = 1;
 	queue_can_find((*m), queue);
 	if (is_solvable((*m)))
+	{
+		free(queue);
 		return (1);
+	}
+	free(queue);
 	return (0);
 }
 
@@ -128,7 +132,7 @@ void	mapping_map(t_map **m)
 	{
 		if ((*m)->nbr_cols != (int)(len_no_n(currentline) - 1))
 		{
-			(*m)->mp = NULL;
+			free((*m)->mp);
 			return ;
 		}
 		(*m)->mp[i] = currentline;
