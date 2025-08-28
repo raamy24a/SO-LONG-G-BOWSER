@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:00:54 by radib             #+#    #+#             */
-/*   Updated: 2025/07/14 09:01:14 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/22 14:13:56 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	map_clean(t_map *m)
 	free(m);
 }
 
-void	cleanup(t_map *m, int x)
+int	cleanup(t_map *m, int x)
 {
 	int	i;
 
@@ -97,6 +97,7 @@ int	main(void)
 	{
 		cleanup(m, x);
 	}
+	mlx_hook(m->w_ptr, 17, 1L >> 17, cleanup_exit, m);
 	mlx_key_hook(m->w_ptr, handle_key, m);
 	mlx_loop(m->m_ptr);
 	return (0);

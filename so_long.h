@@ -6,7 +6,7 @@
 /*   By: radib <radib@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:09 by radib             #+#    #+#             */
-/*   Updated: 2025/07/14 08:46:57 by radib            ###   ########.fr       */
+/*   Updated: 2025/07/22 14:13:35 by radib            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ int		ft_putnbr(int n);
 int		ft_put_unsigned(unsigned int decimal);
 int		ft_putstr(char *s);
 int		ft_printf(const char *format_str, ...);
+int		cleanup_exit(t_map *m);
+void	map_clean(t_map *m);
 
 #endif
